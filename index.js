@@ -26,6 +26,14 @@ function Initiate() {
 
     dataSetUp()
 
+    var start3 = window.performance.now()
+
+    calculateAverage()
+
+    var end3 = window.performance.now()
+
+    console.log(`Execution Time : ${end3 - start3} ms`)
+
 }
 
 function heapSort(array) {
@@ -127,7 +135,29 @@ function dataSetUp() {
 
 }
 
-function randomin(min,max)
-{
+function randomin(min, max) {
     return Math.floor(Math.random()*(max-min+1)+min);
+
+}
+
+function calculateAverage() {
+    var database = openDatabase('Student','1.0','Student Marks',10 * 1024 * 1024) 
+
+    const marklist = []
+
+    database.transaction(function(tx) {
+        tx.executeSql('select * from MARKS', [], function(tx, result) {
+            var len = result.rows.length
+
+            for(let i = 0; i < len; i++) {   
+                marklist.push((result.rows.item(i).subject1 + result.rows.item(i).subject2 + result.rows.item(i).subject3)/3)
+            
+            }  
+
+        }, null)
+
+    })
+
+    console.log(marklist)
+
 }

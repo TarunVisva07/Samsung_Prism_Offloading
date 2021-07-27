@@ -24,6 +24,8 @@ function Initiate() {
     console.log(sample2)
     console.log(`Sorting Time : ${end2 - start2} ms`)
 
+    dataSetUp()
+
 }
 
 function heapSort(array) {
@@ -50,11 +52,11 @@ function heapify(array, len, i) {
     var right_child = 2*i + 2
     var largest = i
 
-    if(left_child<len && array[left_child]>array[largest]) {
+    if(left_child < len && array[left_child] > array[largest]) {
         largest = left_child
 
     }
-    if(right_child<len && array[right_child]>array[largest]) {
+    if(right_child < len && array[right_child] > array[largest]) {
         largest = right_child
 
     }
@@ -94,4 +96,38 @@ function selectionSort(array) {
 
     }
 
+}
+
+function dataSetUp() {
+    var database = openDatabase('Student','1.0','Student Marks',10 * 1024 * 1024) 
+
+    database.transaction(function(tx) {
+        //tx.executeSql('drop table if exists MARKS')
+        tx.executeSql('create table if not exists MARKS (rollno int primary key, subject1 int, subject2 int, subject3 int)')
+
+    })
+
+    const marklist = []
+
+    for(let i = 0; i < 300; i++) {
+        marklist.push(randomin(35,100))
+
+    }
+
+    for(let i = 0; i < 100; i++) {
+
+        database.transaction(function(tx) {
+            tx.executeSql('insert into MARKS values (?, ?, ?, ?)',[i + 1, marklist[3*i], marklist[3*i + 1], marklist[3*i + 2]])
+
+        })
+
+    }
+
+    console.log("Data entry done!")
+
+}
+
+function randomin(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
 }

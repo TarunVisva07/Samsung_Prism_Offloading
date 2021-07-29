@@ -31,11 +31,13 @@
     </header>
 
 	<main>
-		<label for="number">Number of Elements (log10(N)*100) :</label><br></br>
+		<label for="number">Number of Elements :</label><br></br>
 
 		<input type="range" id="number" value="1" min="1" max="400" name="vol"/><br></br>
 
 		<a href="#same" onclick="triggerSorting()">Click Here</a> To calculate the time of Sorting<br></br>
+
+		<p>Number of Sorted Elements : <span id="noe">1</span>> elements</p>
 
 		<p>Sorting Time Using Heap Sort : <span id="hst">0</span> ms</p>
 

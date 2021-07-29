@@ -201,4 +201,6 @@ function triggerSorting() {
 
     document.getElementById("sst").innerHTML = end2 - start2 
 
+    document.getElementById("noe").innerHTML = len
+
 }

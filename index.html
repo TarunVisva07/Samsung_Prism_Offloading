@@ -30,6 +30,19 @@
 
     </header>
 
+	<main>
+		<label for="number">Number of Elements (log10(N)*100) :</label><br></br>
+
+		<input type="range" id="number" value="1" min="1" max="400" name="vol"/><br></br>
+
+		<a href="#same" onclick="triggerSorting()">Click Here</a> To calculate the time of Sorting<br></br>
+
+		<p>Sorting Time Using Heap Sort : <span id="hst">0</span> ms</p>
+
+		<p>Sorting Time Using Selection Sort : <span id="sst">0</span> ms</p><br></br>
+
+	</main>
+
     <!-- JS Scripts -->
 	<script src="index.js"></script>
 </body>

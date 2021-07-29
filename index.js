@@ -161,3 +161,44 @@ function calculateAverage() {
     console.log(marklist)
 
 }
+
+function triggerSorting() {
+    var len = parseInt(document.getElementById("number").value)
+    len = parseInt(Math.pow(10,len/100))
+
+    console.log(len)
+
+    const array = []
+
+    for(let i = 0; i < len; i++) {
+        array.push(randomin(-10000,10000))
+    }
+
+    const sample1 = array
+    const sample2 = array
+
+    var start1 = window.performance.now()
+
+    heapSort(sample1)
+
+    var end1 = window.performance.now()
+
+
+    console.log(sample1)
+    console.log(`Sorting Time : ${end1 - start1} ms`)
+
+    document.getElementById("hst").innerHTML = end1 - start1 
+
+    var start2 = window.performance.now()
+
+    selectionSort(sample2)
+
+    var end2 = window.performance.now()
+
+
+    console.log(sample2)
+    console.log(`Sorting Time : ${end2 - start2} ms`)
+
+    document.getElementById("sst").innerHTML = end2 - start2 
+
+}

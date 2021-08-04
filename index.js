@@ -147,13 +147,13 @@ function simpleNumbersSetUp() {
 
     const nums = []
 
-    for(let i = 0; i < 1000; i++) {
+    for(let i = 0; i < 100; i++) {
         nums.push(randomin(1,100000000))
     }
 
     console.log(nums)
 
-    for(let i = 0; i < 1000; i++) {
+    for(let i = 0; i < 100; i++) {
 
         database.transaction(function(tx) {
             tx.executeSql('insert into NUMBERS values (?, ?)',[i + 1, nums[i]])
@@ -238,7 +238,6 @@ function triggerSorting() {
 
 function triggerMM() {
     var len = parseInt(document.getElementById("meter2").value)
-    len = parseInt(Math.pow(10,len/100))
 
     console.log(len)
 
@@ -249,7 +248,7 @@ function triggerMM() {
     database.transaction(function(tx) {
         tx.executeSql('select * from NUMBERS', [], function(tx, result) {
             for(let i = 0; i < len; i++) {
-                nums.push(result.row.item(i).num) 
+                nums.push(result.rows.item(i).num) 
             
             }
 

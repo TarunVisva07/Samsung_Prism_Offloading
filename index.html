@@ -31,9 +31,11 @@
     </header>
 
 	<main>
-		<label for="number">Number of Elements :</label><br></br>
+		<h2>Sorting</h2>
 
-		<input type="range" id="number" value="1" min="1" max="400" name="vol"/><br></br>
+		<label for="meter1">Number of Elements (Exponential) :</label><br></br>
+
+		<input type="range" class="number" id="meter1" value="1" min="1" max="400" name="vol"/><br></br>
 
 		<a href="#same" onclick="triggerSorting()">Click Here</a> To calculate the time of Sorting<br></br>
 
@@ -42,6 +44,14 @@
 		<p>Sorting Time Using Heap Sort : <span id="hst">0</span> ms</p>
 
 		<p>Sorting Time Using Selection Sort : <span id="sst">0</span> ms</p><br></br>
+
+		<h2>Mean and Median</h2>
+
+		<label for="meter2">Number of Elements (Exponential) :</label><br></br>
+
+		<input type="range" class="number" id="meter2" value="1" min="1" max="400" name="vol"/><br></br>
+
+		<a href="#same" onclick="triggerMM()">Click Here</a> To calculate the time of finding mean and median<br></br>
 
 	</main>
 

@@ -30,6 +30,8 @@ function Initiate() {
 
     calculateAverage()
 
+    simpleNumbersSetUp()
+
     var end3 = window.performance.now()
 
     console.log(`Execution Time : ${end3 - start3} ms`)
@@ -107,7 +109,7 @@ function selectionSort(array) {
 }
 
 function dataSetUp() {
-    var database = openDatabase('Student','1.0','Student Marks',10 * 1024 * 1024) 
+    var database = openDatabase('Student','1.0','Student Marks',100 * 1024 * 1024) 
 
     database.transaction(function(tx) {
         //tx.executeSql('drop table if exists MARKS')
@@ -135,13 +137,42 @@ function dataSetUp() {
 
 }
 
+function simpleNumbersSetUp() {
+    var database = openDatabase('Student','1.0','Student Marks',100 * 1024 * 1024)
+
+    database.transaction(function(tx) {
+        tx.executeSql('create table if not exists NUMBERS (rowno int primary key, num int)')
+
+    })
+
+    const nums = []
+
+    for(let i = 0; i < 1000; i++) {
+        nums.push(randomin(1,100000000))
+    }
+
+    console.log(nums)
+
+    for(let i = 0; i < 1000; i++) {
+
+        database.transaction(function(tx) {
+            tx.executeSql('insert into NUMBERS values (?, ?)',[i + 1, nums[i]])
+
+        })
+
+    }
+
+    console.log("Number Entry Done!")
+
+}
+
 function randomin(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 
 }
 
 function calculateAverage() {
-    var database = openDatabase('Student','1.0','Student Marks',10 * 1024 * 1024) 
+    var database = openDatabase('Student','1.0','Student Marks',100 * 1024 * 1024) 
 
     const marklist = []
 
@@ -163,7 +194,7 @@ function calculateAverage() {
 }
 
 function triggerSorting() {
-    var len = parseInt(document.getElementById("number").value)
+    var len = parseInt(document.getElementById("meter1").value)
     len = parseInt(Math.pow(10,len/100))
 
     console.log(len)
@@ -202,5 +233,30 @@ function triggerSorting() {
     document.getElementById("sst").innerHTML = end2 - start2 
 
     document.getElementById("noe").innerHTML = len
+
+}
+
+function triggerMM() {
+    var len = parseInt(document.getElementById("meter2").value)
+    len = parseInt(Math.pow(10,len/100))
+
+    console.log(len)
+
+    var database = openDatabase('Student','1.0','Student Marks',100 * 1024 * 1024)
+    
+    const nums = []
+
+    database.transaction(function(tx) {
+        tx.executeSql('select * from NUMBERS', [], function(tx, result) {
+            for(let i = 0; i < len; i++) {
+                nums.push(result.row.item(i).num) 
+            
+            }
+
+        }, null)
+   
+    })
+
+    console.log(nums)
 
 }
